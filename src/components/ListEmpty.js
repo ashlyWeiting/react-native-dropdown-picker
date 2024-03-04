@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
+import GeneralText from './GeneralText';
 
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 function ListEmpty({
   loading,
@@ -8,13 +9,18 @@ function ListEmpty({
   ActivityIndicatorComponent,
   listMessageContainerStyle,
   listMessageTextStyle,
+  maxFontSizeMultiplier,
 }) {
   return (
     <View style={listMessageContainerStyle}>
       {loading ? (
         <ActivityIndicatorComponent />
       ) : (
-        <Text style={listMessageTextStyle}>{message}</Text>
+        <GeneralText
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+          style={listMessageTextStyle}>
+          {message}
+        </GeneralText>
       )}
     </View>
   );

@@ -3,6 +3,7 @@ import React, { memo, useCallback, useMemo } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { RTL_DIRECTION, RTL_STYLE } from '../constants';
+import GeneralText from './GeneralText';
 
 function RenderBadge({
   rtl,
@@ -18,6 +19,7 @@ function RenderBadge({
   showBadgeDot,
   onPress,
   THEME,
+  maxFontSizeMultiplier,
 }) {
   /**
    * onPress.
@@ -66,7 +68,11 @@ function RenderBadge({
   return (
     <TouchableOpacity style={_badgeStyle} {...props} onPress={__onPress}>
       {showBadgeDot && <View style={_badgeDotStyle} />}
-      <Text style={_badgeTextStyle}>{label}</Text>
+      <GeneralText
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+        style={_badgeTextStyle}>
+        {label}
+      </GeneralText>
     </TouchableOpacity>
   );
 }

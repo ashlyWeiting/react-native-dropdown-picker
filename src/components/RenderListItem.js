@@ -1,4 +1,5 @@
 import React, { memo, useCallback, useMemo } from 'react';
+import GeneralText from './GeneralText';
 
 import { Text, TouchableOpacity } from 'react-native';
 
@@ -34,6 +35,7 @@ function RenderListItem({
   onPress,
   setPosition,
   THEME,
+  maxFontSizeMultiplier,
 }) {
   /**
    * The tick icon component.
@@ -206,9 +208,12 @@ function RenderListItem({
       disabled={selectable === false || disabled}
       testID={item.testID}>
       {IconComponent}
-      <Text style={_listItemLabelStyle} {...labelProps}>
+      <GeneralText
+        maxFontSizeMultiplier={maxFontSizeMultiplier}
+        style={_listItemLabelStyle}
+        {...labelProps}>
         {label}
-      </Text>
+      </GeneralText>
       {_TickIconComponent}
     </TouchableOpacity>
   );

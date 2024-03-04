@@ -22,9 +22,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  FlatList,
+  ScrollView,
 } from 'react-native';
 
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import {
   ASCII_CODE,
   BADGE_COLORS,
@@ -46,6 +47,7 @@ import THEMES from '../themes';
 import ListEmpty from './ListEmpty';
 import RenderBadgeItem from './RenderBadgeItem';
 import RenderListItem from './RenderListItem';
+import GeneralText from './GeneralText';
 
 const { height: WINDOW_HEIGHT } = Dimensions.get('window');
 
@@ -164,6 +166,7 @@ function Picker({
   translation = {},
   zIndex = 5000,
   zIndexInverse = 6000,
+  maxFontSizeMultiplier,
 }) {
   const [necessaryItems, setNecessaryItems] = useState([]);
   const [searchText, setSearchText] = useState('');
@@ -183,6 +186,7 @@ function Picker({
     value: null,
   });
 
+  console.log('PickerPickerPickerPicker', maxFontSizeMultiplier);
   const THEME = useMemo(() => THEMES[theme].default, [theme]);
   const ICON = useMemo(() => THEMES[theme].ICONS, [theme]);
 
@@ -992,9 +996,12 @@ function Picker({
     () => (
       <>
         {SelectedItemIconComponent}
-        <Text style={_labelStyle} {...labelProps}>
+        <GeneralText
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+          style={_labelStyle}
+          {...labelProps}>
           {_selectedItemLabel}
-        </Text>
+        </GeneralText>
       </>
     ),
     [SelectedItemIconComponent, _labelStyle, labelProps, _selectedItemLabel],
@@ -1168,9 +1175,12 @@ function Picker({
   const BadgeListEmptyComponent = useCallback(
     () => (
       <View style={labelContainerStyle}>
-        <Text style={_labelStyle} {...labelProps}>
+        <GeneralText
+          maxFontSizeMultiplier={maxFontSizeMultiplier}
+          style={_labelStyle}
+          {...labelProps}>
           {_placeholder}
-        </Text>
+        </GeneralText>
       </View>
     ),
     [_labelStyle, labelContainerStyle, labelProps, _placeholder],
@@ -1763,7 +1773,11 @@ function Picker({
           ) : (
             listMode === LIST_MODE.MODAL && (
               <View style={styles.flex}>
-                <Text style={_modalTitleStyle}>{modalTitle}</Text>
+                <GeneralText
+                  maxFontSizeMultiplier={maxFontSizeMultiplier}
+                  style={_modalTitleStyle}>
+                  {modalTitle}
+                </GeneralText>
               </View>
             )
           )}
