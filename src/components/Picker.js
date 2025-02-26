@@ -186,7 +186,6 @@ function Picker({
     value: null,
   });
 
-  console.log('PickerPickerPickerPicker', maxFontSizeMultiplier);
   const THEME = useMemo(() => THEMES[theme].default, [theme]);
   const ICON = useMemo(() => THEMES[theme].ICONS, [theme]);
 
